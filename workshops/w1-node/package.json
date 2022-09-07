@@ -1,0 +1,11 @@
+{
+  "name": "w1-node",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sharon",
+  "license": "ISC"
+}
