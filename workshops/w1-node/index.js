@@ -12,6 +12,11 @@ const app = express();
 // Define the app's routing -- HTTP server gives a router by default
 // app.get is a specific case of app.use
 app.get('/', requestHandler);
+
+// Flag that if banana.html was requested, it will immediately go to error route
+// Make sure to put before express.static...
+app.use('/banana.html', errorRoute);
+
 // Make everything in our public folder serviceable
 // __dirname is the route directory of our project
 app.use(express.static(__dirname + '/public'));
@@ -55,6 +60,12 @@ function vegRoutes(req, res, next){
  function bananaRoute(req, res, next){
     res.sendFile(__dirname + '/public/banana.html');
  }
+
+//new error route:
+function errorRoute(req, res, next){
+    const error = new Error('Not valid url');
+    res.send(error.message);
+}
 
 // Allow the server to listen for incoming requests on port 4200
 // Once this starts running, it never stops until you quit it
