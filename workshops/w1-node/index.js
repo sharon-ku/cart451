@@ -12,6 +12,9 @@ const app = express();
 // Define the app's routing -- HTTP server gives a router by default
 // app.get is a specific case of app.use
 app.get('/', requestHandler);
+// Make everything in our public folder serviceable
+// __dirname is the route directory of our project
+app.use(express.static(__dirname + '/public'));
 // Forward the requests.... (using a filter)
 // vegRoutes and fruitRoutes are my middleware: they are scripts that run
 app.use('/veg', vegRoutes);
