@@ -33,6 +33,8 @@ function fruitRoutes(req, res, next){
     // next is a function to call to invoke the next middleware
      console.log("IN FRUIT FUNCTION ");
      console.log(req);
+    //  Get further url: e.g. if I do fruit/123, /123 will be logged
+     console.log(req.url);
      res.send("WE ARE HERE FRUIT ROUTE");
 }
 
