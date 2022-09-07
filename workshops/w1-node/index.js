@@ -19,6 +19,8 @@ app.use(express.static(__dirname + '/public'));
 // vegRoutes and fruitRoutes are my middleware: they are scripts that run
 app.use('/veg', vegRoutes);
 app.use('/fruit',fruitRoutes);
+// When I type localhost:4200/banana, it will take me to banana.html
+app.use('/banana', bananaRoute);
 
 // The request is the URL that the client requested
 // The response is sent back to the client
@@ -48,6 +50,10 @@ function vegRoutes(req, res, next){
    console.log("IN VEG FUNCTION ");
    console.log(req);
   res.send("WE ARE HERE VEG ROUTE");
+ }
+
+ function bananaRoute(req, res, next){
+    res.sendFile(__dirname + '/public/banana.html');
  }
 
 // Allow the server to listen for incoming requests on port 4200
