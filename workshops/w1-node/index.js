@@ -23,13 +23,14 @@ app.use(express.static(__dirname + '/public'));
 // Forward the requests.... (using a filter)
 // vegRoutes and fruitRoutes are my middleware: they are scripts that run
 app.use('/veg', vegRoutes);
-app.use('/fruit',fruitRoutes);
+app.use('/fruit', fruitRoutes);
 // When I type localhost:4200/banana, it will take me to banana.html
 app.use('/banana', bananaRoute);
+app.use('/passingTheVars', handleGetVars);
 
 // The request is the URL that the client requested
 // The response is sent back to the client
-function requestHandler(request,response){
+function requestHandler(request, response) {
     // send a default response to the client...
     response.send("HELLO WORLD");
     console.log(request); //built in
@@ -37,39 +38,46 @@ function requestHandler(request,response){
     console.log(request.url);
 }
 
-function fruitRoutes(req, res, next){
+function fruitRoutes(req, res, next) {
     // req is the Node.js http request object
     // res is the Node.js http response object
     // next is a function to call to invoke the next middleware
-     console.log("IN FRUIT FUNCTION ");
-     console.log(req);
+    console.log("IN FRUIT FUNCTION ");
+    console.log(req);
     //  Get further url: e.g. if I do fruit/123, /123 will be logged
-     console.log(req.url);
-     res.send("WE ARE HERE FRUIT ROUTE");
+    console.log(req.url);
+    res.send("WE ARE HERE FRUIT ROUTE");
 }
 
-function vegRoutes(req, res, next){
+function vegRoutes(req, res, next) {
     // req is the Node.js http request object
-   // res is the Node.js http response object
-   // next is a function to call to invoke the next middleware
-   console.log("IN VEG FUNCTION ");
-   console.log(req);
-  res.send("WE ARE HERE VEG ROUTE");
- }
+    // res is the Node.js http response object
+    // next is a function to call to invoke the next middleware
+    console.log("IN VEG FUNCTION ");
+    console.log(req);
+    res.send("WE ARE HERE VEG ROUTE");
+}
 
- function bananaRoute(req, res, next){
+function bananaRoute(req, res, next) {
     res.sendFile(__dirname + '/public/banana.html');
- }
+}
 
 //new error route:
-function errorRoute(req, res, next){
+function errorRoute(req, res, next) {
     const error = new Error('Not valid url');
     res.send(error.message);
 }
 
+function handleGetVars(request, response, next) {
+    console.log(request.url);
+    // the request object will contain all the parameters that I want
+    console.log(request.query);
+    response.send("GOT IT! THANKS!");
+}
+
 // Allow the server to listen for incoming requests on port 4200
 // Once this starts running, it never stops until you quit it
-app.listen(portNumber, function() {
+app.listen(portNumber, function () {
     console.log("Server is running on port " + portNumber);
 });
 
