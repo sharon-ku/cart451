@@ -24,7 +24,7 @@ Typefaces
 
 body {
   /* width: 100vw; */
-  background: var(--bg);
+  /* background: var(--bg); */
 
   padding: 0 20px;
 }
