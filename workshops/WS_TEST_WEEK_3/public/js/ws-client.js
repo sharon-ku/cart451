@@ -16,6 +16,24 @@ window.onload = function () {
   //1: when the connection is open (setup)
   ws.onopen = function () {
 
+    document.querySelector("#button_1").addEventListener("click", function (event) {
+      event.preventDefault();
+      //console.log(document.querySelector("#textAreaTest").value);
+      let textData = document.querySelector("#textAreaTest").value;
+      ws.send(JSON.stringify({ eventName: 'text_one', payload: textData }));
+ 
+      //reset
+      document.querySelector("#textAreaTest").value = "";
+ 
+    })
+
+    document.querySelector("#button_1R").addEventListener("click", function (event) {
+      event.preventDefault();
+     //A:::make a request for A text
+      ws.send(JSON.stringify({ eventName: 'read_one', payload: '' }));
+    })
+
+
     //OPTION 1:: 
     // Web Socket is connected, send data using send()
     //ws.send(`Sending a Message from ${myID}`);
@@ -26,6 +44,11 @@ window.onload = function () {
       //let receivedMsg = event.data;
       let jsonParse = JSON.parse(event.data);
       console.log("Message is received..." + jsonParse.payload);
+
+      if(jsonParse.eventName ==="text_one_r"){
+        //B::: put into A
+        document.querySelector("#response_A").textContent = jsonParse.payload;
+      }
     };
 
   } //on open

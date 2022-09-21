@@ -3,6 +3,10 @@ const express = require('express');
 const portNumber = 4200;
 const WebSocket = require("ws");
 
+const FileHandler = require('./FileHandler');
+let fileReaderInstance = new FileHandler('./myFiles/inputC.txt');
+
+
 
 
 const app = express(); //make an instance of express
@@ -45,6 +49,18 @@ wss.on('connection', function connection(ws, req) {
            sendInitMessage(ws,req);
 
         }
+
+        if (jsonParse.eventName === "text_one") {
+            console.log("write-one");
+            console.log(jsonParse.payload);
+             saveTextA(ws,jsonParse.payload);
+        }
+
+        if (jsonParse.eventName === "read_one") {
+            console.log("read-one");;
+             readAndSendA(ws);
+          }
+
       
     }); //one
 }); //connect
@@ -54,6 +70,25 @@ function sendInitMessage(ws ,req){
     console.log(`a connection has been established from ${ip}`);
     ws.send(JSON.stringify({ eventName: 'server_connect', payload: "success init" }));
 }
+
+
+function saveTextA(ws,text){
+    ws.send(JSON.stringify({ eventName: 'text_one_s', payload: "success for text one" }));
+
+    // fileReaderInstance.writeTextSync(text);
+//OR
+   fileReaderInstance.appendTextSync(text);
+
+}
+
+function readAndSendA(ws){
+    //send back
+    //OUTPUT RAW/UTF
+    let theDataRead = fileReaderInstance.readTextSync(); 
+    console.log(theDataRead);
+    ws.send(JSON.stringify({ eventName: 'text_one_r', payload: theDataRead }));
+}
+
 
 
 // // IMPLEMENT THE BROADCAST FUNCTION TO ALL
