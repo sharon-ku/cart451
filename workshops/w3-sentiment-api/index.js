@@ -14,6 +14,9 @@ let bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
+const CustomSentiModule = require('./CustomSentiModule');
+let customSentiModInstance = new CustomSentiModule();
+
 
 //default route
 app.get('/', function(req, res){
