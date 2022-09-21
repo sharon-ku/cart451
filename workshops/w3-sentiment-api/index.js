@@ -9,6 +9,12 @@ let static = require('node-static'); // for serving static files (i.e. css,js,ht
 // serve anything from this dir ...
 app.use(express.static(__dirname + '/public'));
 
+// "body parser" is need to deal with post requests
+let bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
+
 //default route
 app.get('/', function(req, res){
   res.send('<h1>Hello world</h1>');
@@ -25,3 +31,11 @@ httpServer.listen(portNumber, function(){
 app.get('/clientSentiment', function(req, res) {
     res.sendFile(__dirname + '/public/clientSentiment.html');
 });
+
+/// use this VERB for getting posted data...
+app.post('/getSentiment',handlePost);
+ 
+// the callback
+function handlePost(request,response){
+  console.log(request.body.clientPhrase);
+}
