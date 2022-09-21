@@ -41,4 +41,10 @@ app.post('/getSentiment',handlePost);
 // the callback
 function handlePost(request,response){
   console.log(request.body.clientPhrase);
+
+  let reply = customSentiModInstance.runAnalysis(request.body.clientPhrase);
+  //NOTE: we are also adding in the original sentence
+   reply.clientSentence=request.body.clientPhrase;
+   console.log(reply);
+   response.send(reply);
 }
