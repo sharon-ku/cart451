@@ -5,16 +5,16 @@ const WebSocket = require("ws");
 
 
 
-        const app = express(); //make an instance of express
-        const server = require('http').createServer(app);
-        const wss = new WebSocket.Server({ server });
-        // create a server (using the Express framework object)
-        app.use(express.static(__dirname + '/public'));
-        app.use('/client', wsClientRequestRoute);
+const app = express(); //make an instance of express
+const server = require('http').createServer(app);
+const wss = new WebSocket.Server({ server });
+// create a server (using the Express framework object)
+app.use(express.static(__dirname + '/public'));
+app.use('/client', wsClientRequestRoute);
 
-        //default route
-    app.get('/', function (req, res) {
-    res.send('<h1>Hello world</h1>');
+//default route
+app.get('/', function (req, res) {
+res.send('<h1>Hello world</h1>');
 });
 
 function wsClientRequestRoute(req, res, next) {
