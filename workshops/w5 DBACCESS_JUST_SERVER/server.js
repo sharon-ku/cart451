@@ -66,6 +66,10 @@ function handlePost(request,response){
 async function  handleGetVars  (request,response,next){
   console.log(request.url);
   console.log(request.query.paramOne);
-  response.send("SUCCESS GET");
+  // response.send("SUCCESS GET");
+
+  let results = await PhoneUseModel.find({App:request.query.paramOne});
+  console.log(results[0]);
+  response.send(results);
 }
 
