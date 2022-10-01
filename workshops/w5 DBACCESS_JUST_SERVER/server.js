@@ -14,6 +14,7 @@ app.use('/varsToMongo',handleGetVars);
 const url = process.env.MONGODB_URI;
 console.log(url);
 const PhoneUseModel = require("./DBSchema.js");
+const GooglePlayAppModel = require("./DBGooglePlaySchema.js");
 
 // connect to db
 mongoose.connect(url);
@@ -23,13 +24,46 @@ db.once("open", async function () {
   console.log("are here");
 
   // Query all entries with App as Insta and specific Date, and output only the App entries
-  PhoneUseModel.find({App:"Instagram", Date:"08/26/2022"}, "App").then((result) => {
+  // PhoneUseModel.find({App:"Instagram", Date:"08/26/2022"}, "App").then((result) => {
+  //   console.log(result);
+  // })
+
+  // Count how many Insta users there are
+  // let numInstagramUsers = await GooglePlayAppModel.countDocuments({App:"Instagram"});
+  // console.log(numInstagramUsers);
+
+
+  // GooglePlayAppModel.find({Category:"ART_AND_DESIGN"}, "App").then((result) => {
+  //   console.log(result);
+  // })
+
+  // START HERE FOR QUERIES:
+  
+  // #1: Query all entries of Category art and design, with >= 4 rating, and has >= 10000 reviews, then output name of app
+  // GooglePlayAppModel.find({Category:"ART_AND_DESIGN", Rating: { $gte: 4 }, Reviews: { $gte: 10000}}, "App").then((result) => {
+  //   console.log(result);
+  // })
+
+  // #2:
+  // GooglePlayAppModel.find({Category:"BEAUTY", Rating: { $lte: 5 }, Reviews: { $gte: 1000}}).then((result) => {
+  //   console.log(result);
+  // })
+
+  // #3: Find apps with review less than 1 star, and has at least 1000 reviews
+  // GooglePlayAppModel.find({Rating: { $lte: 1 }, Reviews: { $gte: 1000}}).then((result) => {
+  //   console.log(result);
+  // })
+
+  // #4: Books and reference apps with at least 4 stars and at least 10000 reviews
+  // GooglePlayAppModel.find({Category:"BOOKS_AND_REFERENCE", Rating: { $gte: 4}, Reviews: { $gte: 10000}}).then((result) => {
+  //   console.log(result);
+  // })
+
+  // #5: Find apps with 5 stars, and has at least 50 reviews
+  GooglePlayAppModel.find({Rating: { $gte: 5 }, Reviews: { $gte: 50}}).then((result) => {
     console.log(result);
   })
 
-  // Count how many Insta users there are
-  let numInstagramUsers = await PhoneUseModel.countDocuments({App:"Instagram"});
-  console.log(numInstagramUsers);
 
 });
 
@@ -68,7 +102,7 @@ async function  handleGetVars  (request,response,next){
   console.log(request.query.paramOne);
   // response.send("SUCCESS GET");
 
-  let results = await PhoneUseModel.find({App:request.query.paramOne});
+  let results = await GooglePlayAppModel.find({App:request.query.paramOne});
   console.log(results[0]);
   response.send(results);
 }
