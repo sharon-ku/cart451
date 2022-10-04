@@ -40,29 +40,40 @@ db.once("open", async function () {
   // START HERE FOR QUERIES:
   
   // #1: Query all entries of Category art and design, with >= 4 rating, and has >= 10000 reviews, then output name of app
-  // GooglePlayAppModel.find({Category:"ART_AND_DESIGN", Rating: { $gte: 4 }, Reviews: { $gte: 10000}}, "App").then((result) => {
-  //   console.log(result);
-  // })
+  let numResults = await GooglePlayAppModel.countDocuments({Category:"ART_AND_DESIGN", Rating: { $gte: 4 }, Reviews: { $gte: 10000}});
+  console.log(numResults);
+  GooglePlayAppModel.find({Category:"ART_AND_DESIGN", Rating: { $gte: 4 }, Reviews: { $gte: 10000}}, "App").then((result) => {
+    console.log(result);
+  })
 
-  // #2:
-  // GooglePlayAppModel.find({Category:"BEAUTY", Rating: { $lte: 5 }, Reviews: { $gte: 1000}}).then((result) => {
+  // #2: Find all Beauty category apps with >=4 rating and has >= 1000 reviews
+  // let numResults = await GooglePlayAppModel.countDocuments({Category:"BEAUTY", Rating: { $gte: 4 }, Reviews: { $gte: 1000}});
+  // console.log(numResults);
+  // GooglePlayAppModel.find({Category:"BEAUTY", Rating: { $gte: 4 }, Reviews: { $gte: 1000}}).then((result) => {
   //   console.log(result);
   // })
+  
 
   // #3: Find apps with review less than 1 star, and has at least 1000 reviews
+  // let numResults = await GooglePlayAppModel.countDocuments({Rating: { $lte: 1 }, Reviews: { $gte: 1000}});
+  // console.log(numResults);
   // GooglePlayAppModel.find({Rating: { $lte: 1 }, Reviews: { $gte: 1000}}).then((result) => {
   //   console.log(result);
   // })
 
-  // #4: Books and reference apps with at least 4 stars and at least 10000 reviews
-  // GooglePlayAppModel.find({Category:"BOOKS_AND_REFERENCE", Rating: { $gte: 4}, Reviews: { $gte: 10000}}).then((result) => {
+  // #4: Books and reference apps with at least 4 stars and at least 10000 reviews, and output app name
+  // let numResults = await GooglePlayAppModel.countDocuments({Category:"BOOKS_AND_REFERENCE", Rating: { $gte: 4}, Reviews: { $gte: 10000}});
+  // console.log(numResults);
+  // GooglePlayAppModel.find({Category:"BOOKS_AND_REFERENCE", Rating: { $gte: 4}, Reviews: { $gte: 10000}}, "App").then((result) => {
   //   console.log(result);
   // })
 
   // #5: Find apps with 5 stars, and has at least 50 reviews
-  GooglePlayAppModel.find({Rating: { $gte: 5 }, Reviews: { $gte: 50}}).then((result) => {
-    console.log(result);
-  })
+  // let numResults = await GooglePlayAppModel.countDocuments({Rating: { $gte: 5 }, Reviews: { $gte: 50}});
+  // console.log(numResults);
+  // GooglePlayAppModel.find({Rating: { $gte: 5 }, Reviews: { $gte: 50}}).then((result) => {
+  //   console.log(result);
+  // })
 
 
 });
