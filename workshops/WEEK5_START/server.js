@@ -52,8 +52,22 @@ db.once("open", async function () {
 let regexMadaline = /MadaLINE/i
 let regexChoice = /(Emma|Michelle|Miranda)/
 let regexP = /\bp(\w)+/i     // \b means can be bound at the start or end // find any words that start with p
-AirBNBCustomEntry.findOne({ host_name: regexP }).then((result) => {
-   console.log(result)
+// AirBNBCustomEntry.findOne({ host_name: regexP }).then((result) => {
+//    console.log(result)
+
+//   })
+
+AirBNBCustomEntry.find({ host_name: regexChoice }).then((results) => {
+   console.log(results);
+
+   results.forEach((res)=> {
+      if (res.house_rules !== null) {
+        wc.process(res.house_rules);
+      }
+    
+   })
+ 
+   wc.logTheDict();
 
   })
 
