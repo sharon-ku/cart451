@@ -125,3 +125,14 @@ console.log("todayIsWednesday".replace(/y/g,"*"));
 // take the first two words and reverse them; $2 and $1 are positions that come with the replace() function
 console.log("apple pear banana".replace(/(\w+) (\w+)/, "$2 $1"));
 
+// ----------- tockenizing -----------------
+// defining where the splitting will occur: these punctuations and space
+let rePun = /[.,; ]/;
+// split takes a delimiter, in this case, it's rePun
+let splitR1 = ("test has won the day;").split(rePun);
+console.log(splitR1);
+
+// end of sentence
+let reSentence = /[.?!]/;
+let splitR2 = ("test has won the day.testhas won the day.").split(reSentence);
+console.log(splitR2);
