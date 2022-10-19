@@ -107,6 +107,32 @@ averageTip = new javascriptFuzzylogic.FuzzySet('average').generateMembershipValu
     },
 });
 
+// Set up our linguistic variables
+serviceVariable = new javascriptFuzzylogic.LinguisticVariable('service')
+.addSet(serviceBad)
+.addSet(serviceGood)
+.addSet(serviceExcellent);
+
+foodVariable = new javascriptFuzzylogic.LinguisticVariable('food')
+.addSet(foodAwful)
+.addSet(foodDelicious);
+
+tipVariable = new javascriptFuzzylogic.LinguisticVariable('tip')
+.addSet(cheapTip)
+.addSet(averageTip)
+.addSet(generousTip);
+
+// Create fuzzy inference system
+exampleFIS = new javascriptFuzzylogic.FuzzyInferenceSystem('Example')
+.addInput(serviceVariable)
+.addInput(foodVariable)
+.addOutput(tipVariable);
+
+// Add rules to inference system
+exampleFIS.addRule('IF service IS bad OR food IS awful THEN tip is low');
+exampleFIS.addRule('IF service IS excellent OR food IS delicious THEN tip is high');
+exampleFIS.addRule('IF service IS good THEN tip IS average');
+
 
 
 }
