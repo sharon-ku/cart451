@@ -1,4 +1,6 @@
 const express = require("express");
+const fuzzyInfer = require('./fuzzyInfer.js');
+fuzzyInfer.fuzzInferInit();
 
 const portNumber = 4200;
 const app = express(); //make an instance of express
@@ -33,6 +35,8 @@ async function  handleGetVars  (request,response,next){
     console.log(request.query.paramFood);
     let ratings =  {service:parseInt(request.query.paramService),food: parseInt(request.query.paramFood)}
 
-    response.send({"tip": "nothing yet"});
+    // Calculate tip and give it back
+    let tipResult = fuzzyInfer.getTip(ratings);
+    response.send({"tip": tipResult});
  }
 

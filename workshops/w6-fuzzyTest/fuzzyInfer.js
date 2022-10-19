@@ -4,8 +4,9 @@ const javascriptFuzzylogic = require("javascript-fuzzylogic");
 let exampleFIS =null;
 let serviceGood, serviceBad,serviceExcellent,foodDelicious,foodAwful,cheapTip, averageTip, generousTip =null;
 let foodVariable, serviceVariable, tipVariable =null;
-//fuzzInferInit();
-//getTip({service:10 , food:10})
+// fuzzInferInit();
+// console.log(getTip({service:10 , food:10}));
+
 function fuzzInferInit(){
 
 // We start by creating our fuzzy sets (or membership functions) that will make up our variables
@@ -115,28 +116,36 @@ serviceVariable = new javascriptFuzzylogic.LinguisticVariable('service')
 
 foodVariable = new javascriptFuzzylogic.LinguisticVariable('food')
 .addSet(foodAwful)
-.addSet(foodDelicious);
+.addSet(foodDelicious)
 
 tipVariable = new javascriptFuzzylogic.LinguisticVariable('tip')
 .addSet(cheapTip)
 .addSet(averageTip)
-.addSet(generousTip);
+.addSet(generousTip)
 
 // Create fuzzy inference system
 exampleFIS = new javascriptFuzzylogic.FuzzyInferenceSystem('Example')
 .addInput(serviceVariable)
 .addInput(foodVariable)
-.addOutput(tipVariable);
+.addOutput(tipVariable)
 
 // Add rules to inference system
-exampleFIS.addRule('IF service IS bad OR food IS awful THEN tip is low');
-exampleFIS.addRule('IF service IS excellent OR food IS delicious THEN tip is high');
-exampleFIS.addRule('IF service IS good THEN tip IS average');
+exampleFIS.addRule('IF service IS bad OR food IS awful THEN tip IS low')
+exampleFIS.addRule('IF service IS excellent OR food IS delicious THEN tip IS high')
+exampleFIS.addRule('IF service IS good THEN tip IS average')
 
 
 
 }
 
+// incomingObj contains whatever service or food we're looking for
+function getTip(incomingObj) {
+    let result = exampleFIS.solve('Mamdani', incomingObj, javascriptFuzzylogic.DefuzzicationType.Centroid);
 
+    return result;
+}
 
+// Make it exportable
+module.exports.getTip = getTip;
+module.exports.fuzzInferInit = fuzzInferInit;
 
