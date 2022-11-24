@@ -23,3 +23,18 @@ let ruleSet = new natural.RuleSet('EN');
 let tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
 
 console.log(tagger.tag(tokens));
+
+// WordNet
+let wordnet = new natural.WordNet();
+
+wordnet.lookup('chair', function (results) {
+    results.forEach(function (result) {
+        console.log('------------------------------------');
+        // synsetOffset = where it is within the network
+        console.log(result.synsetOffset);
+        console.log(result.pos);
+        console.log(result.lemma);
+        console.log(result.synonyms);
+        console.log(result.gloss);
+    });
+});
