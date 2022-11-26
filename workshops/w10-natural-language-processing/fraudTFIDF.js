@@ -1,9 +1,3 @@
-// const portNumber = 4200;
-// const app = express(); //make an instance of express
-// const server = require("http").createServer(app);
-// Pulling our concordance object from a separate "module" - concordance.js
-// Load a file for quick testing
-
 const TFIDF = require('./TFIDF');
 let fs = require('fs');
 
@@ -12,7 +6,6 @@ let tfIDF = new TFIDF();
 loadSamples();
 
 function loadSamples() {
-    // let filenames = ['fraud1.txt', 'fraud2.txt', 'fraud3.txt'];
     // Number of fraud documents
     let numFraudDocs = 12;
     // Array storing all the docs
