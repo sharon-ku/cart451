@@ -2,7 +2,7 @@
 // const app = express(); //make an instance of express
 // const server = require("http").createServer(app);
 // Pulling our concordance object from a separate "module" - concordance.js
-let WordCount= require('./wordCount');
+let WordCount = require('./wordCount');
 
 // make server listen for incoming messages
 // server.listen(portNumber, function () {
@@ -14,7 +14,7 @@ let fs = require('fs');
 
 // And we'll look at all files in the jane austen directory
 let file = fs.readFileSync('files/cat.txt', 'utf8');
-//console.log(file);
+// console.log(file);
 
 
 
