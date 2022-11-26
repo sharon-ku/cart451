@@ -4,8 +4,8 @@ let WordCount = require('./wordCount');
 // app.use(express.static('public'));
 let fs = require('fs');
 
-// And we'll look at all files in the jane austen directory
-let file = fs.readFileSync('files/fraud0.txt', 'utf8');
+// And we'll look at all fraud files
+let file = fs.readFileSync('files/fraud-all.txt', 'utf8');
 // console.log(file);
 
 
