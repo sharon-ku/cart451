@@ -30,15 +30,30 @@ let verbs = [`want`, `discovered`, `receive`, `need`, `has`, `received`, `moving
 
 
 
-let randomPhrase = undefined;
-
 let verbStrings = [];
+
+let ellipseBg = undefined;
 
 /**
 Preload all assets
 */
 function preload() {
 
+}
+
+function createVerbFor(string, i, ellipseBgR, ellipseBgG, ellipseBgB, numPhrases) {
+    let ellipseBg = {
+        r: ellipseBgR,
+        g: ellipseBgG,
+        b: ellipseBgB
+    };
+
+    if (verbs[i] === string) {
+        for (let j = 0; j < numPhrases; j++) {
+            let verbString = new Verb(verbs[i], ellipseBg, phrases.want[j]);
+            verbStrings.push(verbString);
+        }
+    }
 }
 
 
@@ -50,51 +65,40 @@ function setup() {
     noStroke();
 
 
-
     for (let i = 0; i < verbs.length; i++) {
-        let verbString = new Verb(verbs[i]);
-        verbStrings.push(verbString);
+        // bittersweet (red-coral)
+        createVerbFor(`want`, i, 255, 107, 108, phrases.want.length);
+        // maximum yellow red (mustard yellow)
+        createVerbFor(`discovered`, i, 255, 193, 69, phrases.discovered.length);
+        // sap green
+        createVerbFor(`receive`, i, 63, 125, 32, phrases.receive.length);
+        // french pink
+        createVerbFor(`need`, i, 225, 114, 159, phrases.need.length);
+        // dutch white
+        createVerbFor(`has`, i, 219, 211, 173, phrases.has.length);
+        // green ryb
+        createVerbFor(`received`, i, 114, 176, 29, phrases.received.length);
+        // dark blue gray
+        createVerbFor(`moving`, i, 91, 95, 151, phrases.moving.length);
+        // lavender gray
+        createVerbFor(`look`, i, 184, 184, 209, phrases.look.length);
+        // steel teal
+        createVerbFor(`approved`, i, 98, 146, 158, phrases.approved.length);
+        // dark electric blue
+        createVerbFor(`start`, i, 84, 106, 123, phrases.start.length);
+        // bistre (mud brown)
+        createVerbFor(`murdered`, i, 73, 44, 29, phrases.murdered.length);
+        // carolina blue
+        createVerbFor(`contacting`, i, 27, 152, 224, phrases.contacting.length);
+        // black shadows (light pinkish beige)
+        createVerbFor(`died`, i, 191, 172, 181, phrases.died.length);
+        // turquoise blue
+        createVerbFor(`made`, i, 129, 244, 225, phrases.made.length);
+        // atomic tangerine
+        createVerbFor(`assist`, i, 247, 153, 110, phrases.assist.length);
+
     }
 
-    let randomVerb = random(verbs);
-    console.log(`randomVerb:` + randomVerb);
-
-    if (randomVerb === `want`) {
-        randomPhrase = random(phrases.want);
-    } else if (randomVerb === `discovered`) {
-        randomPhrase = random(phrases.discovered);
-    } else if (randomVerb === `receive`) {
-        randomPhrase = random(phrases.receive);
-    } else if (randomVerb === `need`) {
-        randomPhrase = random(phrases.need);
-    } else if (randomVerb === `has`) {
-        randomPhrase = random(phrases.has);
-    } else if (randomVerb === `received`) {
-        randomPhrase = random(phrases.received);
-    } else if (randomVerb === `moving`) {
-        randomPhrase = random(phrases.moving);
-    } else if (randomVerb === `look`) {
-        randomPhrase = random(phrases.look);
-    } else if (randomVerb === `approved`) {
-        randomPhrase = random(phrases.approved);
-    } else if (randomVerb === `start`) {
-        randomPhrase = random(phrases.start);
-    } else if (randomVerb === `murdered`) {
-        randomPhrase = random(phrases.murdered);
-    } else if (randomVerb === `contacting`) {
-        randomPhrase = random(phrases.contacting);
-    } else if (randomVerb === `died`) {
-        randomPhrase = random(phrases.died);
-    } else if (randomVerb === `made`) {
-        randomPhrase = random(phrases.made);
-    } else if (randomVerb === `assist`) {
-        randomPhrase = random(phrases.assist);
-    }
-
-    console.log(randomPhrase);
-
-    // randomPhrase = random(phrases);
-    // console.log(randomPhrase);
 }
 
 

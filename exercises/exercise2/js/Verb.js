@@ -1,5 +1,5 @@
 class Verb {
-    constructor(key) {
+    constructor(key, bg, phrase) {
         this.border = 100;
 
         // movement
@@ -12,25 +12,49 @@ class Verb {
 
         // word that is shown
         this.key = key;
+        // phrase attached to it
+        this.phrase = phrase;
 
         // size
-        this.size = 50;
+        this.size;
+
+        // ellipse
+        this.ellipse = {
+            width: 120,
+            height: 80,
+            fill: {
+                r: bg.r,
+                g: bg.g,
+                b: bg.b
+            },
+        }
+
     }
 
     update() {
-        this.display();
+        this.displayEllipse();
+        this.displayString();
         this.constrainMovement();
         this.move();
 
         this.hover();
     }
 
+    // Draw ellipse
+    displayEllipse() {
+        push();
+        fill(this.ellipse.fill.r, this.ellipse.fill.g, this.ellipse.fill.b);
+        ellipseMode(CENTER);
+        ellipse(this.x, this.y, this.ellipse.width, this.ellipse.height);
+        pop();
+    }
+
     // Draw string
-    display() {
+    displayString() {
         push();
         textSize(this.size);
         fill(255);
-        textAlign(CENTER);
+        textAlign(CENTER, CENTER);
         text(this.key, this.x, this.y);
         pop();
     }
@@ -65,15 +89,24 @@ class Verb {
 
     hover() {
         if (this.overlap()) {
-            this.size = 100;
+            this.size = 30;
         } else {
-            this.size = 50;
+            this.size = 20;
         }
     }
 
     clicked() {
         if (this.overlap()) {
-            this.size = 300;
+            // this.size = 300;
+            console.log(this.phrase);
+
+            let completePhraseString = ``;
+
+            for (let i = 0; i < this.phrase.length; i++) {
+                let currentPhraseString = this.phrase[i];
+                completePhraseString += ` ${currentPhraseString}`;
+                console.log(completePhraseString);
+            }
         }
     }
 }
