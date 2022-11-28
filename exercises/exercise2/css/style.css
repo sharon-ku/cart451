@@ -4,15 +4,73 @@ Css
 
 **********************************************/
 
-body {
+* {
   padding: 0;
   margin: 0;
-  display: grid;
-  /* Set up the grid and justify/align to center */
-  justify-content: center;
-  align-content: center;
-  height: 100vh;
-  /* Body is the height of the viewport */
-  overflow: hidden;
-  /* Hide anything that goes off the window size */
+  box-sizing: border-box;
+  font-family: sans-serif;
+  /* overflow: hidden; */
+}
+
+body {}
+
+
+#header-section {
+  position: absolute;
+  color: white;
+  text-align: center;
+
+  display: flex;
+  width: 100%;
+  flex-flow: column wrap;
+
+  margin-top: 40px;
+}
+
+#title {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+#subtitle {
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+#verb {
+  border: 2px solid white;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+/* Scam box section */
+
+#scam-box-wrapper {
+  position: absolute;
+  bottom: 0px;
+
+  display: flex;
+  width: 100%;
+}
+
+#scam-box {
+  background: white;
+  display: flex;
+  flex-flow: column wrap;
+  padding: 20px;
+
+  /* width: 100%; */
+  margin: 50px auto;
+  width: 500px;
+  height: 170px;
+  /* max-width: 1000px; */
+}
+
+#message-header h1 {
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+
+#scam-box p {
+  margin-top: 20px;
 }

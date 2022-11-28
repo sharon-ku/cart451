@@ -7,17 +7,46 @@
 
   <title>Exercise 2 | NLP</title>
 
-  <!-- CSS stylesheet(s) -->
+  <!-- CSS stylesheets -->
   <link rel="stylesheet" type="text/css" href="css/style.css" />
 
-  <!-- Library script(s) -->
+  <!-- Library scripts -->
+  <!-- p5 -->
   <script src="js/libraries/p5.min.js"></script>
   <script src="js/libraries/p5.sound.min.js"></script>
 
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- jQuery UI -->
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
-  <!-- HTML would go here if needed. -->
+  <section id="header-section">
+    <h1 id="title">Revenge Against Scammers</h1>
+    <p id="subtitle">Need ✧inspiration✧ to spice up the messages you send to your scammer?</p>
+    <p id="task">➱ Click on a <span id="verb">verb</span> to generate a phrase that has previously been used by a
+      scammer.</p>
+  </section>
+
+  <section id="scam-box-wrapper">
+    <section id="scam-box">
+      <section id="message-header">
+        <h1>
+          <b>To:</b> my favorite scammer ❤
+        </h1>
+        <h1>
+          <b>From:</b> someone with lots of free time seeking revenge
+        </h1>
+      </section>
+
+      <hr>
+
+
+      <p id="scam-phrase">Phrase will be shown here.</p>
+    </section>
+  </section>
+
   <!-- My script(s) -->
   <script src="js/phrases-with-top-verbs.js"></script>
   <script src="js/Verb.js"></script>

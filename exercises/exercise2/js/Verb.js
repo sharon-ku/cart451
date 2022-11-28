@@ -1,12 +1,21 @@
+// Template to create a verb (bubble with verb on it)
+
 class Verb {
     constructor(key, bg, phrase) {
-        this.border = 100;
+        if (width > 1000) {
+            this.border = 400;
+        } else {
+            this.border = 100;
+        }
+
+        this.borderTop = 220;
+        this.borderBottom = 300;
 
         // movement
         this.x = random(this.border, width - this.border);
-        this.y = random(this.border, height - this.border);
+        this.y = random(this.borderTop, height - this.borderBottom);
 
-        this.speed = 0.5;
+        this.speed = 0.3;
         this.vx = this.speed;
         this.vy = this.speed;
 
@@ -20,8 +29,8 @@ class Verb {
 
         // ellipse
         this.ellipse = {
-            width: 120,
-            height: 80,
+            width: 95,
+            height: 60,
             fill: {
                 r: bg.r,
                 g: bg.g,
@@ -53,7 +62,7 @@ class Verb {
     displayString() {
         push();
         textSize(this.size);
-        fill(255);
+        fill(0);
         textAlign(CENTER, CENTER);
         text(this.key, this.x, this.y);
         pop();
@@ -62,7 +71,7 @@ class Verb {
     // don't let it escapes
     constrainMovement() {
         this.x = constrain(this.x, this.border, width - this.border);
-        this.y = constrain(this.y, this.border, height - this.border);
+        this.y = constrain(this.y, this.borderTop, height - this.borderBottom);
     }
 
     // Move randomly
@@ -80,7 +89,7 @@ class Verb {
     }
 
     overlap() {
-        if (mouseX > this.x - this.size / 2 && mouseX < this.x + this.size / 2 && mouseY > this.y - this.size / 2 && mouseY < this.y + this.size / 2) {
+        if (mouseX > this.x - this.ellipse.width / 2 && mouseX < this.x + this.ellipse.width / 2 && mouseY > this.y - this.ellipse.height / 2 && mouseY < this.y + this.ellipse.height / 2) {
             return true;
         } else {
             return false;
@@ -89,24 +98,31 @@ class Verb {
 
     hover() {
         if (this.overlap()) {
-            this.size = 30;
-        } else {
             this.size = 20;
+        } else {
+            this.size = 15;
         }
     }
 
+    // When clicked on bubble:
     clicked() {
         if (this.overlap()) {
-            // this.size = 300;
             console.log(this.phrase);
 
             let completePhraseString = ``;
 
+            // Transform array of strings into single string
             for (let i = 0; i < this.phrase.length; i++) {
                 let currentPhraseString = this.phrase[i];
                 completePhraseString += ` ${currentPhraseString}`;
                 console.log(completePhraseString);
             }
+
+            // Update scam message displayed in box
+            $(`#scam-phrase`).text(completePhraseString);
+
+            $(`#scam-phrase`).effect("highlight", "slow");
+
         }
     }
 }
