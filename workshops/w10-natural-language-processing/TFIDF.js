@@ -126,23 +126,22 @@ class TFIDF {
     console.log(this.dict);
     //this.sortByCount();
 
-    // Only show the keys words
+    // // Only show the keys words
+    // for (let i = 0; i < this.keys.length; i++) {
+    //   console.log(this.keys[i]
+    //   );
+    // }
+
+    // Show the keys words with count and tfidf score
     for (let i = 0; i < this.keys.length; i++) {
-      console.log(this.keys[i]
+      console.log(this.keys[i] + ': '
+        + "count: " + this.dict[this.keys[i]].count + " "
+        + "doc Count: " + this.dict[this.keys[i]].docCount + " "
+        // + "word: "+ this.dict[this.keys[i]].word+ " "
+        + "tfidf: " + this.dict[this.keys[i]].tfidf + " "
 
       );
     }
-
-    // Show the keys words with count and tfidf score
-    // for (let i = 0; i < this.keys.length; i++) {
-    //   console.log(this.keys[i] + ': '
-    //     + "count: " + this.dict[this.keys[i]].count + " "
-    //     + "doc Count: " + this.dict[this.keys[i]].docCount + " "
-    //     // + "word: "+ this.dict[this.keys[i]].word+ " "
-    //     + "tfidf: " + this.dict[this.keys[i]].tfidf + " "
-
-    //   );
-    // }
   }
 
   //Sort array of keys by counts

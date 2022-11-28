@@ -27,11 +27,11 @@ Tokenizing
 // Tokenizing all words that appear in more than one document
 let tokenizer = new natural.WordTokenizer();
 let tokens = tokenizer.tokenize(file);
-// console.log(`tokens` + tokens);
+console.log(`tokens` + tokens);
 
 // Tokenizing all words that appear in more than one document AND are verbs only
 let tokensVerbs = tokenizer.tokenize(fileOnlyVerbs);
-// console.log(`tokensVerbs` + tokensVerbs);
+console.log(`tokensVerbs` + tokensVerbs);
 
 /* ===============
 Stemming
@@ -39,7 +39,7 @@ Stemming
 console.log(`===stemming starts here:====`)
 
 for (let i = 0; i < tokens.length; i++) {
-    // console.log(natural.PorterStemmer.stem(tokens[i]));
+    console.log(natural.PorterStemmer.stem(tokens[i]));
 }
 
 
@@ -62,7 +62,7 @@ let tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
 
 console.log(`===pos starts here:====`)
 
-// console.log(tagger.tag(tokens));
+console.log(tagger.tag(tokens));
 
 
 
